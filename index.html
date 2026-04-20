@@ -225,8 +225,10 @@
   <!-- ── Bush layer — behind fence (z-index 12), peeks above fence line ── -->
   <!-- Bumpy hedge silhouette. GSAP sets y=100vh initially, rises to y=58vh -->
   <div class="layer layer-bush">
-    <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 0,180 L 0,100
+    <!-- 35vh tall: top 18vh visible above fence (z-index 12 < fence 15),
+         bottom 17vh extends behind fence so it looks rooted, not floating -->
+    <svg viewBox="0 0 1440 350" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0,350 L 0,100
         Q 55,16  120,78
         Q 178,10  248,72
         Q 305,6   378,70
@@ -238,8 +240,8 @@
         Q 1092,6  1162,66
         Q 1222,12 1295,72
         Q 1348,14 1440,82
-        L 1440,180 Z" fill="#2e6b24"/>
-      <path d="M 0,180 L 0,118
+        L 1440,350 Z" fill="#2e6b24"/>
+      <path d="M 0,350 L 0,118
         Q 55,46  120,100
         Q 178,40 248,95
         Q 305,38 378,94
@@ -251,7 +253,7 @@
         Q 1092,38 1162,92
         Q 1222,44 1295,98
         Q 1348,46 1440,105
-        L 1440,180 Z" fill="#356b28" opacity="0.45"/>
+        L 1440,350 Z" fill="#356b28" opacity="0.45"/>
     </svg>
   </div>
 
