@@ -10,9 +10,181 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- ── Parallax layers (fixed to viewport) ── -->
+  <div class="layer layer-sky"></div>
+  <div class="layer layer-trees-back">
+    <svg viewBox="0 0 1440 2200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+
+      <defs>
+        <!-- Subtle trunk gradient: dark brown -->
+        <linearGradient id="trunk-grad" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%"   stop-color="#1a0d06"/>
+          <stop offset="40%"  stop-color="#2c1810"/>
+          <stop offset="100%" stop-color="#1a0d06"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Forest floor base -->
+      <rect x="0" y="1950" width="1440" height="250" fill="#1a3d2b"/>
+
+      <!-- Each tree: 5 trapezoid tiers (wider at base, pinched at top of each tier)
+           Tier structure relative to tip_y:
+             T1: top ±6,  bot ±55  at tip+300
+             T2: top ±28, bot ±76  at tip+665  (gap 345–665, starts +345)
+             T3: top ±40, bot ±98  at tip+1050 (starts +710)
+             T4: top ±52, bot ±120 at tip+1455 (starts +1095)
+             T5: top ±62, bot ±140 at tip+1900 (starts +1500)
+      -->
+      <g fill="#2d6a4f">
+
+        <!-- TREE 1  cx=90, tip=60 -->
+        <polygon points="84,60   96,60   145,360  35,360"/>
+        <polygon points="62,360  118,360 166,725  14,725"/>
+        <polygon points="50,725  130,725 188,1110 -8,1110"/>
+        <polygon points="38,1110 142,1110 210,1515 -30,1515"/>
+        <polygon points="28,1515 152,1515 230,1960 -50,1960"/>
+
+        <!-- TREE 2  cx=270, tip=95 -->
+        <polygon points="264,95  276,95  325,395  215,395"/>
+        <polygon points="242,395 298,395 346,760  194,760"/>
+        <polygon points="230,760 310,760 368,1145 172,1145"/>
+        <polygon points="218,1145 322,1145 390,1550 150,1550"/>
+        <polygon points="208,1550 332,1550 410,1995 130,1995"/>
+
+        <!-- TREE 3  cx=455, tip=50 -->
+        <polygon points="449,50  461,50  510,350  400,350"/>
+        <polygon points="427,350 483,350 531,715  379,715"/>
+        <polygon points="415,715 495,715 553,1100 357,1100"/>
+        <polygon points="403,1100 507,1100 575,1505 335,1505"/>
+        <polygon points="393,1505 517,1505 595,1950 315,1950"/>
+
+        <!-- TREE 4  cx=650, tip=80 -->
+        <polygon points="644,80  656,80  705,380  595,380"/>
+        <polygon points="622,380 678,380 726,745  574,745"/>
+        <polygon points="610,745 690,745 748,1130 552,1130"/>
+        <polygon points="598,1130 702,1130 770,1535 530,1535"/>
+        <polygon points="588,1535 712,1535 790,1980 510,1980"/>
+
+        <!-- TREE 5  cx=850, tip=55 -->
+        <polygon points="844,55  856,55  905,355  795,355"/>
+        <polygon points="822,355 878,355 926,720  774,720"/>
+        <polygon points="810,720 890,720 948,1105 752,1105"/>
+        <polygon points="798,1105 902,1105 970,1510 730,1510"/>
+        <polygon points="788,1510 912,1510 990,1955 710,1955"/>
+
+        <!-- TREE 6  cx=1050, tip=85 -->
+        <polygon points="1044,85  1056,85  1105,385  995,385"/>
+        <polygon points="1022,385 1078,385 1126,750  974,750"/>
+        <polygon points="1010,750 1090,750 1148,1135 952,1135"/>
+        <polygon points="998,1135 1102,1135 1170,1540 930,1540"/>
+        <polygon points="988,1540 1112,1540 1190,1985 910,1985"/>
+
+        <!-- TREE 7  cx=1250, tip=65 -->
+        <polygon points="1244,65  1256,65  1305,365  1195,365"/>
+        <polygon points="1222,365 1278,365 1326,730  1174,730"/>
+        <polygon points="1210,730 1290,730 1348,1115 1152,1115"/>
+        <polygon points="1198,1115 1302,1115 1370,1520 1130,1520"/>
+        <polygon points="1188,1520 1312,1520 1390,1965 1110,1965"/>
+
+        <!-- TREE 8  cx=1380, tip=90 (right-edge partial) -->
+        <polygon points="1374,90  1386,90  1435,390  1325,390"/>
+        <polygon points="1352,390 1408,390 1440,755  1304,755"/>
+        <polygon points="1340,755 1420,755 1440,1140 1282,1140"/>
+        <polygon points="1328,1140 1432,1140 1440,1545 1260,1545"/>
+        <polygon points="1318,1545 1440,1545 1440,1990 1240,1990"/>
+
+      </g>
+    </svg>
+  </div>
+  <div class="layer layer-trees-front">
+    <svg viewBox="0 0 1440 2600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Forest floor -->
+      <rect x="0" y="2200" width="1440" height="400" fill="#0f2818"/>
+
+      <g fill="#1a3d2b">
+
+        <!-- TREE 1  cx=160, tip=0 -->
+        <polygon points="152,0   168,0   230,360   90,360"/>
+        <polygon points="122,360 198,360 256,815   64,815"/>
+        <polygon points="106,815 214,815 284,1310  36,1310"/>
+        <polygon points="92,1310 228,1310 312,1855  8,1855"/>
+        <polygon points="80,1855 240,1855 336,2460 -16,2460"/>
+
+        <!-- TREE 2  cx=390, tip=30 -->
+        <polygon points="382,30  398,30  460,390  320,390"/>
+        <polygon points="352,390 428,390 486,845  294,845"/>
+        <polygon points="336,845 444,845 514,1340 266,1340"/>
+        <polygon points="322,1340 458,1340 542,1885 238,1885"/>
+        <polygon points="310,1885 470,1885 566,2490 214,2490"/>
+
+        <!-- TREE 3  cx=620, tip=10 -->
+        <polygon points="612,10  628,10  690,370  550,370"/>
+        <polygon points="582,370 658,370 716,825  524,825"/>
+        <polygon points="566,825 674,825 744,1320 496,1320"/>
+        <polygon points="552,1320 688,1320 772,1865 468,1865"/>
+        <polygon points="540,1865 700,1865 796,2470 444,2470"/>
+
+        <!-- TREE 4  cx=850, tip=20 -->
+        <polygon points="842,20  858,20  920,380  780,380"/>
+        <polygon points="812,380 888,380 946,835  754,835"/>
+        <polygon points="796,835 904,835 974,1330 726,1330"/>
+        <polygon points="782,1330 918,1330 1002,1875 698,1875"/>
+        <polygon points="770,1875 930,1875 1026,2480 674,2480"/>
+
+        <!-- TREE 5  cx=1080, tip=5 -->
+        <polygon points="1072,5   1088,5   1150,365 1010,365"/>
+        <polygon points="1042,365 1118,365 1176,820  984,820"/>
+        <polygon points="1026,820 1134,820 1204,1315 956,1315"/>
+        <polygon points="1012,1315 1148,1315 1232,1860 928,1860"/>
+        <polygon points="1000,1860 1160,1860 1256,2465 904,2465"/>
+
+        <!-- TREE 6  cx=1310, tip=15 (right-edge partial) -->
+        <polygon points="1302,15  1318,15  1380,375  1240,375"/>
+        <polygon points="1272,375 1348,375 1406,830  1214,830"/>
+        <polygon points="1256,830 1364,830 1434,1325 1186,1325"/>
+        <polygon points="1242,1325 1378,1325 1440,1870 1158,1870"/>
+        <polygon points="1230,1870 1390,1870 1440,2475 1134,2475"/>
+
+      </g>
+    </svg>
+  </div>
+  <div class="layer layer-fence">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="62"  width="1440" height="16" rx="3" fill="#6b5a3e"/>
+      <rect x="0" y="120" width="1440" height="16" rx="3" fill="#5a4a30"/>
+      <g fill="#8b7355">
+        <rect x="0"    y="0" width="42" height="178" rx="3"/><polygon points="21,0   0,22  42,22"/>
+        <rect x="60"   y="0" width="42" height="178" rx="3"/><polygon points="81,0  60,22 102,22"/>
+        <rect x="120"  y="0" width="42" height="178" rx="3"/><polygon points="141,0 120,22 162,22"/>
+        <rect x="180"  y="0" width="42" height="178" rx="3"/><polygon points="201,0 180,22 222,22"/>
+        <rect x="240"  y="0" width="42" height="178" rx="3"/><polygon points="261,0 240,22 282,22"/>
+        <rect x="300"  y="0" width="42" height="178" rx="3"/><polygon points="321,0 300,22 342,22"/>
+        <rect x="360"  y="0" width="42" height="178" rx="3"/><polygon points="381,0 360,22 402,22"/>
+        <rect x="420"  y="0" width="42" height="178" rx="3"/><polygon points="441,0 420,22 462,22"/>
+        <rect x="480"  y="0" width="42" height="178" rx="3"/><polygon points="501,0 480,22 522,22"/>
+        <rect x="540"  y="0" width="42" height="178" rx="3"/><polygon points="561,0 540,22 582,22"/>
+        <rect x="600"  y="0" width="42" height="178" rx="3"/><polygon points="621,0 600,22 642,22"/>
+        <rect x="660"  y="0" width="42" height="178" rx="3"/><polygon points="681,0 660,22 702,22"/>
+        <rect x="720"  y="0" width="42" height="178" rx="3"/><polygon points="741,0 720,22 762,22"/>
+        <rect x="780"  y="0" width="42" height="178" rx="3"/><polygon points="801,0 780,22 822,22"/>
+        <rect x="840"  y="0" width="42" height="178" rx="3"/><polygon points="861,0 840,22 882,22"/>
+        <rect x="900"  y="0" width="42" height="178" rx="3"/><polygon points="921,0 900,22 942,22"/>
+        <rect x="960"  y="0" width="42" height="178" rx="3"/><polygon points="981,0 960,22 1002,22"/>
+        <rect x="1020" y="0" width="42" height="178" rx="3"/><polygon points="1041,0 1020,22 1062,22"/>
+        <rect x="1080" y="0" width="42" height="178" rx="3"/><polygon points="1101,0 1080,22 1122,22"/>
+        <rect x="1140" y="0" width="42" height="178" rx="3"/><polygon points="1161,0 1140,22 1182,22"/>
+        <rect x="1200" y="0" width="42" height="178" rx="3"/><polygon points="1221,0 1200,22 1242,22"/>
+        <rect x="1260" y="0" width="42" height="178" rx="3"/><polygon points="1281,0 1260,22 1302,22"/>
+        <rect x="1320" y="0" width="42" height="178" rx="3"/><polygon points="1341,0 1320,22 1362,22"/>
+        <rect x="1380" y="0" width="42" height="178" rx="3"/><polygon points="1401,0 1380,22 1422,22"/>
+      </g>
+    </svg>
+  </div>
+
   <!-- ── Hero ───────────────────────────────────────── -->
   <section class="hero" id="hero">
-    <div class="hero-bg"></div>
     <div class="hero-content">
       <h1 class="hero-title">Built Right Fencing<br>and Tree Planting Services</h1>
       <p class="hero-sub">Honest work. Rooted in PEI.</p>
@@ -135,135 +307,14 @@
   </div>
 </section>
 
-<!-- ── Footer ─────────────────────────────────────── -->
-<footer class="footer-parallax" id="footer" aria-label="Site footer">
-
-  <div class="parallax-layer layer-trees-back" aria-hidden="true">
-    <svg class="trees-svg" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#2d6a4f">
-        <rect x="68" y="220" width="14" height="80" rx="3"/>
-        <polygon points="75,120 40,230 110,230"/>
-        <polygon points="75,160 45,215 105,215"/>
-        <polygon points="75,140 50,198 100,198"/>
-
-        <rect x="248" y="230" width="12" height="70" rx="3"/>
-        <polygon points="254,135 222,240 286,240"/>
-        <polygon points="254,168 226,225 282,225"/>
-        <polygon points="254,148 230,205 278,205"/>
-
-        <rect x="448" y="215" width="14" height="85" rx="3"/>
-        <polygon points="455,110 418,225 492,225"/>
-        <polygon points="455,148 422,210 488,210"/>
-        <polygon points="455,128 425,192 485,192"/>
-
-        <rect x="648" y="225" width="12" height="75" rx="3"/>
-        <polygon points="654,128 620,235 688,235"/>
-        <polygon points="654,162 624,220 684,220"/>
-        <polygon points="654,142 628,202 680,202"/>
-
-        <rect x="848" y="220" width="14" height="80" rx="3"/>
-        <polygon points="855,118 818,230 892,230"/>
-        <polygon points="855,155 822,215 888,215"/>
-        <polygon points="855,135 825,197 885,197"/>
-
-        <rect x="1048" y="228" width="12" height="72" rx="3"/>
-        <polygon points="1054,130 1020,238 1088,238"/>
-        <polygon points="1054,165 1024,222 1084,222"/>
-        <polygon points="1054,145 1027,205 1081,205"/>
-
-        <rect x="1248" y="218" width="14" height="82" rx="3"/>
-        <polygon points="1255,115 1218,228 1292,228"/>
-        <polygon points="1255,152 1222,213 1288,213"/>
-        <polygon points="1255,132 1224,195 1286,195"/>
-
-        <rect x="1388" y="222" width="12" height="78" rx="3"/>
-        <polygon points="1394,120 1360,232 1428,232"/>
-        <polygon points="1394,158 1364,217 1424,217"/>
-        <polygon points="1394,138 1366,199 1422,199"/>
-      </g>
-    </svg>
-  </div>
-
-  <div class="parallax-layer layer-trees-front" aria-hidden="true">
-    <svg class="trees-svg" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#1a3d2b">
-        <rect x="148" y="190" width="18" height="110" rx="4"/>
-        <polygon points="157,60 108,205 206,205"/>
-        <polygon points="157,100 112,188 202,188"/>
-        <polygon points="157,78 115,170 199,170"/>
-
-        <rect x="348" y="185" width="18" height="115" rx="4"/>
-        <polygon points="357,55 304,200 410,200"/>
-        <polygon points="357,94 308,184 406,184"/>
-        <polygon points="357,73 311,166 403,166"/>
-
-        <rect x="548" y="195" width="16" height="105" rx="4"/>
-        <polygon points="556,68 510,208 602,208"/>
-        <polygon points="556,104 514,192 598,192"/>
-        <polygon points="556,83 516,174 596,174"/>
-
-        <rect x="748" y="188" width="18" height="112" rx="4"/>
-        <polygon points="757,58 708,202 806,202"/>
-        <polygon points="757,96 712,185 802,185"/>
-        <polygon points="757,75 714,167 800,167"/>
-
-        <rect x="948" y="192" width="16" height="108" rx="4"/>
-        <polygon points="956,63 910,206 1002,206"/>
-        <polygon points="956,100 914,189 998,189"/>
-        <polygon points="956,80 916,171 996,171"/>
-
-        <rect x="1148" y="186" width="18" height="114" rx="4"/>
-        <polygon points="1157,55 1106,200 1208,200"/>
-        <polygon points="1157,93 1110,183 1204,183"/>
-        <polygon points="1157,72 1112,165 1202,165"/>
-
-        <rect x="1338" y="190" width="16" height="110" rx="4"/>
-        <polygon points="1346,62 1300,204 1392,204"/>
-        <polygon points="1346,99 1304,188 1388,188"/>
-        <polygon points="1346,79 1306,170 1386,170"/>
-      </g>
-    </svg>
-  </div>
-
-  <div class="parallax-layer layer-fence" aria-hidden="true">
-    <svg class="fence-svg" viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0" y="60" width="1440" height="18" rx="4" fill="#8b7355"/>
-      <rect x="0" y="120" width="1440" height="18" rx="4" fill="#7a6445"/>
-      <g fill="#a08060">
-        <rect x="10"   y="0" width="40" height="180" rx="3"/><polygon points="30,0 10,20 50,20"/>
-        <rect x="70"   y="0" width="40" height="180" rx="3"/><polygon points="90,0 70,20 110,20"/>
-        <rect x="130"  y="0" width="40" height="180" rx="3"/><polygon points="150,0 130,20 170,20"/>
-        <rect x="190"  y="0" width="40" height="180" rx="3"/><polygon points="210,0 190,20 230,20"/>
-        <rect x="250"  y="0" width="40" height="180" rx="3"/><polygon points="270,0 250,20 290,20"/>
-        <rect x="310"  y="0" width="40" height="180" rx="3"/><polygon points="330,0 310,20 350,20"/>
-        <rect x="370"  y="0" width="40" height="180" rx="3"/><polygon points="390,0 370,20 410,20"/>
-        <rect x="430"  y="0" width="40" height="180" rx="3"/><polygon points="450,0 430,20 470,20"/>
-        <rect x="490"  y="0" width="40" height="180" rx="3"/><polygon points="510,0 490,20 530,20"/>
-        <rect x="550"  y="0" width="40" height="180" rx="3"/><polygon points="570,0 550,20 590,20"/>
-        <rect x="610"  y="0" width="40" height="180" rx="3"/><polygon points="630,0 610,20 650,20"/>
-        <rect x="670"  y="0" width="40" height="180" rx="3"/><polygon points="690,0 670,20 710,20"/>
-        <rect x="730"  y="0" width="40" height="180" rx="3"/><polygon points="750,0 730,20 770,20"/>
-        <rect x="790"  y="0" width="40" height="180" rx="3"/><polygon points="810,0 790,20 830,20"/>
-        <rect x="850"  y="0" width="40" height="180" rx="3"/><polygon points="870,0 850,20 890,20"/>
-        <rect x="910"  y="0" width="40" height="180" rx="3"/><polygon points="930,0 910,20 950,20"/>
-        <rect x="970"  y="0" width="40" height="180" rx="3"/><polygon points="990,0 970,20 1010,20"/>
-        <rect x="1030" y="0" width="40" height="180" rx="3"/><polygon points="1050,0 1030,20 1070,20"/>
-        <rect x="1090" y="0" width="40" height="180" rx="3"/><polygon points="1110,0 1090,20 1130,20"/>
-        <rect x="1150" y="0" width="40" height="180" rx="3"/><polygon points="1170,0 1150,20 1190,20"/>
-        <rect x="1210" y="0" width="40" height="180" rx="3"/><polygon points="1230,0 1210,20 1250,20"/>
-        <rect x="1270" y="0" width="40" height="180" rx="3"/><polygon points="1290,0 1270,20 1310,20"/>
-        <rect x="1330" y="0" width="40" height="180" rx="3"/><polygon points="1350,0 1330,20 1370,20"/>
-        <rect x="1390" y="0" width="40" height="180" rx="3"/><polygon points="1410,0 1390,20 1430,20"/>
-      </g>
-    </svg>
-  </div>
-
-  <div class="footer-content">
-    <p class="footer-copy">&copy; 2026 Built Right Fencing and Tree Planting Services. Prince Edward Island.</p>
-    <a href="mailto:robjmacd@gmail.com" class="footer-email">robjmacd@gmail.com</a>
-  </div>
-
+<!-- ── Footer ── -->
+<footer class="site-footer">
+  <p class="footer-copy">&copy; 2026 Built Right Fencing and Tree Planting Services. Prince Edward Island.</p>
+  <a href="mailto:robjmacd@gmail.com" class="footer-email">robjmacd@gmail.com</a>
 </footer>
+  <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
