@@ -14,6 +14,7 @@ const trigger = {
 
 gsap.to('.layer-sky',         { y: '-15vh',  ease: 'none', scrollTrigger: trigger });
 gsap.to('.layer-trees-back',  { y: '-60vh',  ease: 'none', scrollTrigger: trigger });
+gsap.to('.layer-trees-mid',   { y: '-85vh',  ease: 'none', scrollTrigger: trigger });
 gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigger });
 
 // Fence: set initial position immediately so only tips are visible from page load.

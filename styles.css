@@ -104,13 +104,15 @@ a { color: inherit; text-decoration: none; }
 }
 
 .layer-trees-back  { height: 220vh; z-index: 1; }
-.layer-trees-front { height: 260vh; z-index: 2; }
+.layer-trees-mid   { height: 240vh; z-index: 2; }
+.layer-trees-front { height: 260vh; z-index: 3; }
 .layer-fence       { height: 35vh;  z-index: 15; }
 
 .layer svg { width: 100%; height: 100%; }
 
 /* Eliminate sub-pixel antialiasing gaps between tier polygons */
 .layer-trees-back svg,
+.layer-trees-mid svg,
 .layer-trees-front svg { shape-rendering: crispEdges; }
 
 /* ── Hero ──────────────────────────────────────────── */
