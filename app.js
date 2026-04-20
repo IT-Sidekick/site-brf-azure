@@ -16,18 +16,20 @@ gsap.to('.layer-sky',         { y: '-15vh',  ease: 'none', scrollTrigger: trigge
 gsap.to('.layer-trees-back',  { y: '-60vh',  ease: 'none', scrollTrigger: trigger });
 gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigger });
 
-// Fence: set initial position immediately so tips are always visible from page load.
+// Fence: set initial position immediately so only tips are visible from page load.
 // gsap.set() applies synchronously — no waiting for a trigger.
 gsap.set('.layer-fence', { y: '96.5vh' });
 
 // Grow fence to full height as the contact section comes into view.
+// end: 'bottom bottom' = when contact's bottom edge hits the viewport bottom — always reachable.
+// 'bottom 80%' was never reached because the contact section (with 32vh padding) is too tall.
 gsap.to('.layer-fence', {
   y: '65vh',
   ease: 'none',
   scrollTrigger: {
     trigger: '#contact',
-    start: 'top 55%',  // starts growing when contact enters upper viewport
-    end: 'bottom 80%', // fully grown before contact finishes scrolling
+    start: 'top 55%',
+    end: 'bottom bottom',
     scrub: 1.5
   }
 });
@@ -58,7 +60,7 @@ gsap.fromTo('#contact',
     scrollTrigger: {
       trigger: '#contact',
       start: 'top bottom',
-      end: 'bottom 80%',
+      end: 'bottom bottom',
       scrub: 2
     }
   }
