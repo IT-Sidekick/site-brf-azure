@@ -20,7 +20,7 @@ gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigge
 // Bush: rises from below, peeks above fence line (z-index 12, behind fence at 15)
 gsap.set('.layer-bush', { y: '100vh' });
 gsap.to('.layer-bush', {
-  y: '58vh',
+  y: '60vh',
   ease: 'none',
   scrollTrigger: {
     trigger: '#contact',

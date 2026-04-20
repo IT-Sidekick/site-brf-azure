@@ -225,8 +225,9 @@
   <!-- ── Bush layer — behind fence (z-index 12), peeks above fence line ── -->
   <!-- Bumpy hedge silhouette. GSAP sets y=100vh initially, rises to y=58vh -->
   <div class="layer layer-bush">
-    <svg viewBox="0 0 1440 250" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 0,250 L 0,155
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Body extends to y=400 (ground), bumpy top stays same shape -->
+      <path d="M 0,400 L 0,155
         Q 55,18  120,88
         Q 178,12  248,82
         Q 305,8   378,80
@@ -238,9 +239,8 @@
         Q 1092,8  1162,76
         Q 1222,14 1295,82
         Q 1348,16 1440,95
-        L 1440,250 Z" fill="#2e6b24"/>
-      <!-- Subtle highlight pass for depth -->
-      <path d="M 0,250 L 0,175
+        L 1440,400 Z" fill="#2e6b24"/>
+      <path d="M 0,400 L 0,175
         Q 55,55  120,110
         Q 178,48 248,105
         Q 305,45 378,105
@@ -252,7 +252,7 @@
         Q 1092,44 1162,102
         Q 1222,50 1295,108
         Q 1348,52 1440,120
-        L 1440,250 Z" fill="#356b28" opacity="0.45"/>
+        L 1440,400 Z" fill="#356b28" opacity="0.45"/>
     </svg>
   </div>
 
@@ -420,20 +420,18 @@
   <div class="lawn-decoration" aria-hidden="true">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- Cluster 1 ~x=120 -->
-      <path d="M120,80 Q117,50 123,14" stroke="#5cc44a" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M130,80 Q136,44 128,9"  stroke="#4db83c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M112,80 Q108,52 116,18" stroke="#62cc50" stroke-width="2"   fill="none" stroke-linecap="round"/>
-      <path d="M140,80 Q147,48 138,16" stroke="#4db83c" stroke-width="2"   fill="none" stroke-linecap="round"/>
+      <!-- Cluster 1 ~x=120 — lawn-matching dark greens, taller tips -->
+      <path d="M120,80 Q117,46 123,-4"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
+      <path d="M130,80 Q136,40 128,-8"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M112,80 Q108,48 116,0"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
+      <path d="M140,80 Q147,44 138,-2"  stroke="#1e4a32" stroke-width="2"   fill="none" stroke-linecap="round"/>
 
       <!-- Lone blade ~x=230 -->
-      <path d="M230,80 Q227,46 233,12" stroke="#5cc44a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M230,80 Q227,42 233,-6"  stroke="#245438" stroke-width="2"   fill="none" stroke-linecap="round"/>
 
-      <!-- Spring flower ~x=310 -->
+      <!-- Spring flower ~x=310 — unchanged, user said perfect -->
       <path d="M310,80 Q309,60 312,38" stroke="#4a7a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <!-- small leaf -->
       <path d="M311,62 Q301,54 304,46" stroke="#4a7a2a" stroke-width="1.5" fill="#5a9230" stroke-linecap="round"/>
-      <!-- petals — 6 circles at 60° intervals around centre -->
       <g transform="translate(312,32)">
         <circle cx="0"    cy="-8"  r="4.5" fill="#fffde8"/>
         <circle cx="6.9"  cy="-4"  r="4.5" fill="#fffde8"/>
@@ -445,26 +443,26 @@
       </g>
 
       <!-- Cluster 2 ~x=580 -->
-      <path d="M580,80 Q577,42 583,8"  stroke="#5cc44a" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M590,80 Q597,46 588,12" stroke="#4db83c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M572,80 Q568,50 576,16" stroke="#62cc50" stroke-width="2"   fill="none" stroke-linecap="round"/>
+      <path d="M580,80 Q577,38 583,-6"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
+      <path d="M590,80 Q597,42 588,-4"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M572,80 Q568,46 576,2"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
 
       <!-- Lone blade ~x=720 -->
-      <path d="M720,80 Q716,48 722,10" stroke="#4db83c" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M720,80 Q716,44 722,-8"  stroke="#1e4a32" stroke-width="2"   fill="none" stroke-linecap="round"/>
 
       <!-- Cluster 3 ~x=920 -->
-      <path d="M920,80 Q917,45 923,10" stroke="#5cc44a" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M930,80 Q937,48 928,14" stroke="#4db83c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M912,80 Q908,50 915,18" stroke="#62cc50" stroke-width="2"   fill="none" stroke-linecap="round"/>
-      <path d="M940,80 Q947,52 937,20" stroke="#4db83c" stroke-width="2"   fill="none" stroke-linecap="round"/>
+      <path d="M920,80 Q917,41 923,-8"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
+      <path d="M930,80 Q937,44 928,-4"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M912,80 Q908,46 915,0"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
+      <path d="M940,80 Q947,48 937,-2"  stroke="#1e4a32" stroke-width="2"   fill="none" stroke-linecap="round"/>
 
       <!-- Lone blade ~x=1100 -->
-      <path d="M1100,80 Q1097,44 1103,10" stroke="#5cc44a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M1100,80 Q1097,40 1103,-8" stroke="#245438" stroke-width="2" fill="none" stroke-linecap="round"/>
 
       <!-- Cluster 4 ~x=1310 -->
-      <path d="M1310,80 Q1307,42 1313,8"  stroke="#5cc44a" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M1320,80 Q1327,46 1318,12" stroke="#4db83c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M1302,80 Q1298,50 1305,16" stroke="#62cc50" stroke-width="2"   fill="none" stroke-linecap="round"/>
+      <path d="M1310,80 Q1307,38 1313,-6"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
+      <path d="M1320,80 Q1327,42 1318,-4"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M1302,80 Q1298,46 1305,2"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
 
     </svg>
   </div>
