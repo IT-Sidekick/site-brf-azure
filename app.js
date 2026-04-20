@@ -18,9 +18,10 @@ gsap.to('.layer-trees-mid',   { y: '-85vh',  ease: 'none', scrollTrigger: trigge
 gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigger });
 
 // Bush: rises from below, peeks above fence line (z-index 12, behind fence at 15)
-gsap.set('.layer-bush', { y: '100vh' });
+// Bush bottom aligns with fence top (65vh) at full scroll → bush spans 47–65vh
+gsap.set('.layer-bush', { y: '98vh' });
 gsap.to('.layer-bush', {
-  y: '60vh',
+  y: '47vh',
   ease: 'none',
   scrollTrigger: {
     trigger: '#contact',
