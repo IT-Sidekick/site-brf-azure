@@ -1,23 +1,22 @@
-(function () {
-  var footer = document.getElementById('footer');
-  if (!footer) return;
-  var treesBack  = footer.querySelector('.layer-trees-back');
-  var treesFront = footer.querySelector('.layer-trees-front');
-  var fence      = footer.querySelector('.layer-fence');
+gsap.registerPlugin(ScrollTrigger);
 
-  function getProgress() {
-    var rect = footer.getBoundingClientRect();
-    var wh = window.innerHeight;
-    return Math.max(0, Math.min(1, (wh - rect.top) / wh));
-  }
+const lenis = new Lenis();
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(time => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
 
-  function applyParallax() {
-    var p = getProgress();
-    treesBack.style.transform  = 'translateY(' + (p * -40) + 'px)';
-    treesFront.style.transform = 'translateY(' + (p * -20) + 'px)';
-    fence.style.transform      = 'translateY(' + ((1 - p) * 80) + 'px)';
-  }
+const trigger = {
+  trigger: document.body,
+  start: 'top top',
+  end: 'bottom bottom',
+  scrub: 1.5
+};
 
-  window.addEventListener('scroll', applyParallax, { passive: true });
-  applyParallax();
-}());
+gsap.to('.layer-sky',         { y: '-15vh',  ease: 'none', scrollTrigger: trigger });
+gsap.to('.layer-trees-back',  { y: '-60vh',  ease: 'none', scrollTrigger: trigger });
+gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigger });
+
+gsap.fromTo('.layer-fence',
+  { y: '100vh' },
+  { y: '65vh', ease: 'none', scrollTrigger: trigger }
+);
