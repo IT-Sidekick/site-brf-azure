@@ -276,3 +276,55 @@ a { color: inherit; text-decoration: none; }
   outline: none;
   border-color: var(--color-green-mid);
 }
+
+/* ── Footer Parallax ───────────────────────────────── */
+.footer-parallax {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, var(--color-sky-top) 0%, var(--color-sky-bottom) 60%, #a8d5b5 100%);
+}
+
+.parallax-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.layer-trees-back  { z-index: 1; }
+.layer-trees-front { z-index: 2; }
+.layer-fence       { z-index: 3; }
+
+.trees-svg,
+.fence-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.footer-content {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  color: var(--color-green-dark);
+  white-space: nowrap;
+}
+
+.footer-copy {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
+
+.footer-email {
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.footer-email:hover { opacity: 1; }
