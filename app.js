@@ -20,3 +20,20 @@ gsap.fromTo('.layer-fence',
   { y: '100vh' },
   { y: '65vh', ease: 'none', scrollTrigger: trigger }
 );
+
+// Section parallax — each content section drifts up slightly as it scrolls through
+['#services', '#about', '#contact'].forEach(id => {
+  gsap.fromTo(id,
+    { y: 50 },
+    {
+      y: -30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: id,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 2
+      }
+    }
+  );
+});

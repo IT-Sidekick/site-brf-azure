@@ -105,9 +105,13 @@ a { color: inherit; text-decoration: none; }
 
 .layer-trees-back  { height: 220vh; z-index: 1; }
 .layer-trees-front { height: 260vh; z-index: 2; }
-.layer-fence       { height: 35vh;  z-index: 3; }
+.layer-fence       { height: 35vh;  z-index: 15; }
 
 .layer svg { width: 100%; height: 100%; }
+
+/* Eliminate sub-pixel antialiasing gaps between tier polygons */
+.layer-trees-back svg,
+.layer-trees-front svg { shape-rendering: crispEdges; }
 
 /* ── Hero ──────────────────────────────────────────── */
 .hero {
@@ -296,30 +300,33 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--color-green-mid);
 }
 
-/* ── Site footer ───────────────────────────────────── */
+/* ── Site footer — lawn strip ──────────────────────── */
 .site-footer {
   position: relative;
-  z-index: 10;
-  min-height: 20vh;
+  z-index: 20;
+  background: #1a3d2b;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xs);
-  padding: var(--space-md);
+  gap: 0.3rem;
+  padding: var(--space-sm) var(--space-md);
   text-align: center;
-  color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 -3px 24px rgba(0, 0, 0, 0.4);
 }
 
-.footer-copy  { font-size: var(--font-size-sm); opacity: 0.8; }
+.footer-copy {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.75);
+}
 
 .footer-email {
   font-size: var(--font-size-sm);
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.2s;
 }
 
-.footer-email:hover { opacity: 1; }
+.footer-email:hover { color: rgba(255, 255, 255, 0.9); }
 
 /* ── Responsive ────────────────────────────────────── */
 
