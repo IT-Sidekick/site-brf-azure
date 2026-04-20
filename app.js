@@ -16,13 +16,24 @@ gsap.to('.layer-sky',         { y: '-15vh',  ease: 'none', scrollTrigger: trigge
 gsap.to('.layer-trees-back',  { y: '-60vh',  ease: 'none', scrollTrigger: trigger });
 gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigger });
 
+// Fence: 3.5vh always visible at bottom (10% of 35vh fence height).
+// Grows to full height as the contact section comes into view.
 gsap.fromTo('.layer-fence',
-  { y: '100vh' },
-  { y: '65vh', ease: 'none', scrollTrigger: trigger }
+  { y: '96.5vh' },
+  {
+    y: '65vh',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#contact',
+      start: 'top 55%',  // starts growing when contact enters upper viewport
+      end: 'bottom 80%', // fully grown before contact finishes scrolling
+      scrub: 1.5
+    }
+  }
 );
 
-// Section parallax — each content section drifts up slightly as it scrolls through
-['#services', '#about', '#contact'].forEach(id => {
+// Services and About drift up as they enter the viewport
+['#services', '#about'].forEach(id => {
   gsap.fromTo(id,
     { y: 50 },
     {
@@ -37,3 +48,18 @@ gsap.fromTo('.layer-fence',
     }
   );
 });
+
+// Contact rests with form content above the fence (padding-bottom handles clearance)
+gsap.fromTo('#contact',
+  { y: 50 },
+  {
+    y: 0,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#contact',
+      start: 'top bottom',
+      end: 'bottom 80%',
+      scrub: 2
+    }
+  }
+);
