@@ -1,5 +1,6 @@
 (function () {
   var footer = document.getElementById('footer');
+  if (!footer) return;
   var treesBack  = footer.querySelector('.layer-trees-back');
   var treesFront = footer.querySelector('.layer-trees-front');
   var fence      = footer.querySelector('.layer-fence');

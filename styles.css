@@ -273,7 +273,8 @@ a { color: inherit; text-decoration: none; }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  outline: none;
+  outline: 2px solid var(--color-green-mid);
+  outline-offset: 2px;
   border-color: var(--color-green-mid);
 }
 
