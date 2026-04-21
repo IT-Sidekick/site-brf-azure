@@ -301,9 +301,15 @@ a { color: inherit; text-decoration: none; }
 
 /* Tablet: ≤ 900px */
 @media (max-width: 900px) {
-  /* Scale fence SVG wider so posts stay visible — GSAP animates the parent div, no conflict */
-  .layer-fence { overflow: hidden; }
+  /* Scale SVGs wider on tablet — GSAP animates parent divs, no transform conflict */
+  .layer-fence,
+  .layer-trees-back,
+  .layer-trees-mid,
+  .layer-trees-front { overflow: hidden; }
   .layer-fence svg { transform: scaleX(1.8); transform-origin: center; }
+  .layer-trees-back svg,
+  .layer-trees-mid svg,
+  .layer-trees-front svg { transform: scaleX(1.5); transform-origin: center; }
 
   :root {
     --font-size-3xl: 2.4rem;
@@ -330,6 +336,9 @@ a { color: inherit; text-decoration: none; }
 /* Mobile: ≤ 600px */
 @media (max-width: 600px) {
   .layer-fence svg { transform: scaleX(2.8); }
+  .layer-trees-back svg,
+  .layer-trees-mid svg,
+  .layer-trees-front svg { transform: scaleX(2.2); }
 
   :root {
     --font-size-3xl: 1.9rem;
