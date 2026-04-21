@@ -301,6 +301,10 @@ a { color: inherit; text-decoration: none; }
 
 /* Tablet: ≤ 900px */
 @media (max-width: 900px) {
+  /* Scale fence SVG wider so posts stay visible — GSAP animates the parent div, no conflict */
+  .layer-fence { overflow: hidden; }
+  .layer-fence svg { transform: scaleX(1.8); transform-origin: center; }
+
   :root {
     --font-size-3xl: 2.4rem;
     --font-size-2xl: 1.8rem;
@@ -325,6 +329,8 @@ a { color: inherit; text-decoration: none; }
 
 /* Mobile: ≤ 600px */
 @media (max-width: 600px) {
+  .layer-fence svg { transform: scaleX(2.8); }
+
   :root {
     --font-size-3xl: 1.9rem;
     --font-size-2xl: 1.5rem;

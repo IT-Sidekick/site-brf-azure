@@ -1,4 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 const lenis = new Lenis();
 lenis.on('scroll', ScrollTrigger.update);
@@ -52,6 +53,8 @@ gsap.fromTo('.layer-fence',
 });
 
 // Contact rests with form content above the fence (padding-bottom handles clearance)
+window.addEventListener('load', () => ScrollTrigger.refresh());
+
 gsap.fromTo('#contact',
   { y: 50 },
   {
