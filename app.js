@@ -17,23 +17,22 @@ gsap.to('.layer-trees-back',  { y: '-60vh',  ease: 'none', scrollTrigger: trigge
 gsap.to('.layer-trees-mid',   { y: '-85vh',  ease: 'none', scrollTrigger: trigger });
 gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigger });
 
-// Fence: set initial position immediately so only tips are visible from page load.
-// gsap.set() applies synchronously — no waiting for a trigger.
-gsap.set('.layer-fence', { y: '96.5vh' });
-
-// Grow fence to full height as the contact section comes into view.
-// end: 'bottom bottom' = when contact's bottom edge hits the viewport bottom — always reachable.
-// 'bottom 80%' was never reached because the contact section (with 32vh padding) is too tall.
-gsap.to('.layer-fence', {
-  y: '65vh',
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '#contact',
-    start: 'top 55%',
-    end: 'bottom bottom',
-    scrub: 1.5
+// fromTo stores both ends in one tween so scrub reversal always rewinds correctly.
+// immediateRender:true (default for fromTo) applies y:96.5vh synchronously at script load.
+gsap.fromTo('.layer-fence',
+  { y: '96.5vh' },
+  {
+    y: '65vh',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#contact',
+      start: 'top 55%',
+      end: 'bottom bottom',
+      scrub: 1.5,
+      invalidateOnRefresh: true
+    }
   }
-});
+);
 
 // Services and About drift up as they enter the viewport
 ['#services', '#about'].forEach(id => {
