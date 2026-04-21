@@ -231,7 +231,7 @@ a { color: inherit; text-decoration: none; }
 .contact {
   position: relative;
   z-index: 10;
-  background: linear-gradient(to bottom, #fff 75%, #23533d 100%);
+  background: linear-gradient(to bottom, #fff 50%, #23533d 100%);
   text-align: center;
   /* Extra bottom space so fence tips overlap the form bottom, not the content */
   padding-bottom: 32vh;
