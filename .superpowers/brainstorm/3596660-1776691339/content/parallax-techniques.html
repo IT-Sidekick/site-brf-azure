@@ -1,0 +1,94 @@
+<h2>Why our parallax isn't working — and how to fix it</h2>
+<p class="subtitle">Three techniques exist. We used the wrong one. Here's the difference.</p>
+
+<div class="section">
+  <h3>The core problem</h3>
+  <p style="background:#1e293b;padding:1rem;border-radius:8px;border-left:3px solid #f59e0b;font-size:0.95rem;line-height:1.7">
+    Our layers ARE stacked correctly (you confirmed <code>position: absolute</code> is applying). The issue is <strong>what moves them</strong>.
+    Our JS only fires when the footer enters the viewport, moving things tiny distances inside a 420px box.
+    That's not parallax — it's a local nudge. Real parallax requires layers fixed to the <em>viewport</em>, moving at different rates across the <em>entire page scroll</em>.
+  </p>
+</div>
+
+<div class="section">
+  <h3>The three techniques — pick one</h3>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>background-attachment: fixed</h3>
+      <p style="font-size:0.82rem;margin-bottom:0.5rem">Pure CSS. One line. Background image stays fixed while content scrolls past it.</p>
+      <div class="pros-cons" style="font-size:0.78rem">
+        <div class="pros"><h4>Pros</h4><ul><li>Dead simple</li><li>No JS</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>One layer only</li><li>No speed control</li><li>Broken on iOS Safari</li></ul></div>
+      </div>
+      <p style="font-size:0.75rem;color:#f59e0b;margin-top:0.5rem">❌ Can't tell a layered story</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>CSS perspective + translateZ</h3>
+      <p style="font-size:0.82rem;margin-bottom:0.5rem">Set <code>perspective: 1px</code> on a scroll container. Elements at negative Z move slower (they're "further away").</p>
+      <div class="pros-cons" style="font-size:0.78rem">
+        <div class="pros"><h4>Pros</h4><ul><li>Pure CSS</li><li>True physics model</li><li>Unlimited layers</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Scroll must be on a div, not body</li><li>Scale() compensation required</li><li>Tricky z-index behaviour</li></ul></div>
+      </div>
+      <p style="font-size:0.75rem;color:#94a3b8;margin-top:0.5rem">⚠️ Works but complex to tune</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>position: fixed + JS depth multipliers ✦ recommended</h3>
+      <p style="font-size:0.82rem;margin-bottom:0.5rem">Background layers are <code>position: fixed</code> (viewport-locked). JS reads <code>scrollY</code> and moves each layer by <code>scrollY × depth</code> — deeper layers move less.</p>
+      <div class="pros-cons" style="font-size:0.78rem">
+        <div class="pros"><h4>Pros</h4><ul><li>Works on mobile</li><li>Full speed control per layer</li><li>Easy to tune</li><li>Reliable cross-browser</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Requires JS</li><li>Content needs z-index management</li></ul></div>
+      </div>
+      <p style="font-size:0.75rem;color:#34d399;margin-top:0.5rem">✅ Right tool for a multi-layer story</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:2rem">
+  <h3>How Technique C works — visually</h3>
+  <div style="background:#0f172a;border-radius:8px;padding:1.5rem;font-family:monospace;font-size:0.8rem;line-height:1.9">
+    <div style="display:grid;grid-template-columns:160px 1fr 1fr;gap:0.5rem;align-items:center">
+      <span style="color:#94a3b8">Layer</span>
+      <span style="color:#94a3b8">CSS position</span>
+      <span style="color:#94a3b8">Movement at scrollY=500px</span>
+
+      <span style="color:#87ceeb">🌤 Sky</span>
+      <span style="color:#e2e8f0">position: fixed</span>
+      <span style="color:#34d399">translateY(500 × 0.05) = 25px ← barely moves</span>
+
+      <span style="color:#2d6a4f">🌲 Far trees</span>
+      <span style="color:#e2e8f0">position: fixed</span>
+      <span style="color:#34d399">translateY(500 × 0.15) = 75px</span>
+
+      <span style="color:#1a3d2b">🌲🌲 Near trees</span>
+      <span style="color:#e2e8f0">position: fixed</span>
+      <span style="color:#34d399">translateY(500 × 0.35) = 175px</span>
+
+      <span style="color:#8b7355">🪵 Fence</span>
+      <span style="color:#e2e8f0">position: fixed</span>
+      <span style="color:#34d399">translateY(500 × 0.60) = 300px ← moves most</span>
+
+      <span style="color:#e2e8f0">📄 Content</span>
+      <span style="color:#e2e8f0">position: relative (normal)</span>
+      <span style="color:#f59e0b">translateY(500 × 1.0) = 500px ← scrolls normally</span>
+    </div>
+    <p style="color:#94a3b8;margin-top:1rem;font-family:sans-serif;font-size:0.78rem">
+      Result: as you scroll 500px down, the sky barely moves, trees drift up slowly, fence comes up faster.
+      Your content (services, about, contact) floats OVER the forest at normal scroll speed.
+      The depth gap between layers IS the parallax.
+    </p>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem">Click C to confirm, or pick another technique. Next step: live demo.</p>

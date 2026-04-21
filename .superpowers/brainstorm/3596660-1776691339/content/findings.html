@@ -1,0 +1,89 @@
+<h2>What working parallax actually uses</h2>
+<p class="subtitle">gentlerain.ai = GSAP + ScrollTrigger + Lenis. Here's what each piece does and why it matters.</p>
+
+<div class="section">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem">
+
+    <div style="background:#1e293b;border-radius:8px;padding:1.2rem;border-top:3px solid #38bdf8">
+      <div style="font-size:0.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem">Library 1</div>
+      <h3 style="color:#38bdf8;margin-bottom:0.5rem">GSAP</h3>
+      <p style="font-size:0.82rem;line-height:1.6">Animation engine. Does the actual <code>translateY</code> transforms smoothly — frame-perfect, GPU-accelerated. Replaces our manual style assignment.</p>
+    </div>
+
+    <div style="background:#1e293b;border-radius:8px;padding:1.2rem;border-top:3px solid #a78bfa">
+      <div style="font-size:0.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem">Library 2</div>
+      <h3 style="color:#a78bfa;margin-bottom:0.5rem">ScrollTrigger</h3>
+      <p style="font-size:0.82rem;line-height:1.6">GSAP plugin that ties animation progress to scroll position. <code>scrub: true</code> means "at 50% scrolled = 50% animated." This is what makes layers move in sync with scroll — reliably, across all browsers.</p>
+    </div>
+
+    <div style="background:#1e293b;border-radius:8px;padding:1.2rem;border-top:3px solid #34d399">
+      <div style="font-size:0.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem">Library 3</div>
+      <h3 style="color:#34d399;margin-bottom:0.5rem">Lenis</h3>
+      <p style="font-size:0.82rem;line-height:1.6">Smooth scroll. Makes the native browser scroll feel buttery. Feeds its position to GSAP's ticker so ScrollTrigger reads smooth values — no jitter or lag.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>The architecture that makes it work</h3>
+  <div style="background:#0f172a;border-radius:8px;padding:1.5rem;font-size:0.8rem;line-height:1.9">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+      <div>
+        <div style="color:#f59e0b;margin-bottom:0.5rem">❌ What we built (BRF footer)</div>
+        <pre style="color:#94a3b8;font-size:0.75rem;white-space:pre-wrap">&lt;footer style="height:420px; overflow:hidden; position:relative"&gt;
+  &lt;div class="layer" style="position:absolute"&gt;trees&lt;/div&gt;
+  &lt;div class="layer" style="position:absolute"&gt;fence&lt;/div&gt;
+&lt;/footer&gt;
+
+JS: fires only when footer enters viewport
+Moves layers 20-80px inside a 420px box
+→ Technically works but visually imperceptible</pre>
+      </div>
+      <div>
+        <div style="color:#34d399;margin-bottom:0.5rem">✅ What actually works</div>
+        <pre style="color:#94a3b8;font-size:0.75rem;white-space:pre-wrap">&lt;!-- Layers fixed to VIEWPORT --&gt;
+&lt;div class="sky"   style="position:fixed"&gt;&lt;/div&gt;
+&lt;div class="trees" style="position:fixed"&gt;&lt;/div&gt;
+&lt;div class="fence" style="position:fixed"&gt;&lt;/div&gt;
+
+&lt;!-- Content scrolls OVER the layers --&gt;
+&lt;main style="position:relative; z-index:10"&gt;...&lt;/main&gt;
+
+GSAP ScrollTrigger scrubs each layer's
+translateY at a different rate as you scroll
+→ sky barely moves, fence moves most</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>The test page we'll build to verify this works in your browser</h3>
+  <div style="background:#1e293b;border-radius:8px;padding:1.2rem">
+    <p style="font-size:0.85rem;margin-bottom:1rem">Minimal standalone page served at <code>http://brf.its.lab/parallax-test.html</code>. No frameworks, no build step — just CDN scripts + one HTML file. Story:</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;font-size:0.78rem">
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;text-align:center">
+        <div style="font-size:1.4rem">🌤</div>
+        <strong style="color:#87ceeb">Page top</strong>
+        <p style="color:#94a3b8;margin-top:0.25rem">Sky + treetops visible. Trees are very tall — you're seeing only the crowns.</p>
+      </div>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;text-align:center">
+        <div style="font-size:1.4rem">🌲</div>
+        <strong style="color:#2d6a4f">25% scrolled</strong>
+        <p style="color:#94a3b8;margin-top:0.25rem">Trees fill the view. Content sections (text) float in front at normal scroll speed.</p>
+      </div>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;text-align:center">
+        <div style="font-size:1.4rem">🌲🌲</div>
+        <strong style="color:#1a3d2b">75% scrolled</strong>
+        <p style="color:#94a3b8;margin-top:0.25rem">Tree trunks dominate. Fence tops begin to appear at bottom of viewport.</p>
+      </div>
+      <div style="background:#0f172a;border-radius:6px;padding:0.75rem;text-align:center">
+        <div style="font-size:1.4rem">🪵</div>
+        <strong style="color:#8b7355">Page bottom</strong>
+        <p style="color:#94a3b8;margin-top:0.25rem">Full fence in foreground. Trees behind. Scene complete.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem">Does this match what you had in mind? Say yes and I'll build the test page now.</p>

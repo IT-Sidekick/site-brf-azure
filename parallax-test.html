@@ -3,16 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Built Right Fencing and Tree Planting Services</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Parallax Test — BRF Technique</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; }
+
+    /* All background layers: fixed to the VIEWPORT */
+    .layer {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .layer-sky {
+      height: 100vh;
+      z-index: 0;
+      background: linear-gradient(to bottom,
+        #1e4d72 0%, #2c6e9e 15%, #4a90c4 35%,
+        #87ceeb 60%, #c8e6f5 80%, #a8d5b5 100%
+      );
+    }
+
+    /* Far trees: 220vh tall. SVG viewBox matches (2200 units = 220vh).
+       GSAP moves this up -60vh, revealing lower trunk-and-floor region. */
+    .layer-trees-back  { height: 220vh; z-index: 1; }
+
+    /* Near trees: 260vh tall. Faster movement creates depth gap vs back trees. */
+    .layer-trees-front { height: 260vh; z-index: 2; }
+
+    /* Fence: GSAP positions this starting below viewport, rising up. */
+    .layer-fence { height: 35vh; z-index: 3; }
+
+    .layer svg { width: 100%; height: 100%; }
+
+    /* Page content: scrolls at 1x speed OVER fixed layers */
+    .page-content {
+      position: relative;
+      z-index: 10;
+      min-height: 500vh;
+    }
+
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .section:last-child { align-items: flex-end; padding-bottom: 5rem; }
+
+    .card {
+      background: rgba(15, 40, 24, 0.62);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 16px;
+      padding: 2.5rem 3rem;
+      max-width: 540px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    }
+    .card h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    .card p  { font-size: 1rem; line-height: 1.7; opacity: 0.88; }
+
+    #debug {
+      position: fixed; top: 1rem; right: 1rem;
+      background: rgba(0,0,0,0.72); color: #34d399;
+      font: 0.7rem/1 monospace; padding: 0.5rem 0.85rem;
+      border-radius: 20px; z-index: 999; letter-spacing: 0.03em;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ── Parallax layers (fixed to viewport) ── -->
+  <!-- ── Layer 0: Sky ──────────────────────────────────────────────────── -->
   <div class="layer layer-sky"></div>
+
+  <!-- ── Layer 1: Far trees ────────────────────────────────────────────── -->
+  <!--
+    viewBox: 0 0 1440 2200  (matches layer height 220vh at 10units/vh)
+    8 trees, each with 5 trapezoid tiers and gaps between them.
+    Tiers widen going down, gaps expose sky between branch layers.
+    Foliage extends to ~y=1960, ground fill takes over from y=1950.
+    At max scroll (-60vh), viewer sees y=600–1600 — all within canopy.
+  -->
   <div class="layer layer-trees-back">
     <svg viewBox="0 0 1440 2200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
 
@@ -98,76 +175,18 @@
     </svg>
   </div>
 
-  <!-- Layer 1.5: Mid trees — hue between back (#2d6a4f) and front (#1a3d2b) -->
-  <!-- viewBox: 0 0 1440 2400  (240vh layer, trees offset from back/front positions) -->
-  <!-- GSAP moves this up -85vh over full page scroll -->
-  <div class="layer layer-trees-mid">
-    <svg viewBox="0 0 1440 2400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-
-      <rect x="0" y="2200" width="1440" height="200" fill="#1e4830"/>
-
-      <g fill="#23533d">
-
-        <!-- TREE 1  cx=40, tip=15 -->
-        <polygon points="33,15   47,15   102,345  -22,345"/>
-        <polygon points="7,345   73,345  126,765  -46,765"/>
-        <polygon points="-7,765  87,765  151,1195 -71,1195"/>
-        <polygon points="-20,1195 100,1195 176,1670 -96,1670"/>
-        <polygon points="-31,1670 111,1670 198,2195 -118,2195"/>
-
-        <!-- TREE 2  cx=180, tip=45 -->
-        <polygon points="173,45  187,45  242,375  118,375"/>
-        <polygon points="147,375 213,375 266,795   94,795"/>
-        <polygon points="133,795 227,795 291,1225  69,1225"/>
-        <polygon points="120,1225 240,1225 316,1700 44,1700"/>
-        <polygon points="109,1700 251,1700 338,2225 22,2225"/>
-
-        <!-- TREE 3  cx=362, tip=10 -->
-        <polygon points="355,10  369,10  424,340  300,340"/>
-        <polygon points="329,340 395,340 448,760  276,760"/>
-        <polygon points="315,760 409,760 473,1190 251,1190"/>
-        <polygon points="302,1190 422,1190 498,1665 226,1665"/>
-        <polygon points="291,1665 433,1665 520,2190 204,2190"/>
-
-        <!-- TREE 4  cx=552, tip=35 -->
-        <polygon points="545,35  559,35  614,365  490,365"/>
-        <polygon points="519,365 585,365 638,785  466,785"/>
-        <polygon points="505,785 599,785 663,1215 441,1215"/>
-        <polygon points="492,1215 612,1215 688,1690 416,1690"/>
-        <polygon points="481,1690 623,1690 710,2215 394,2215"/>
-
-        <!-- TREE 5  cx=750, tip=20 -->
-        <polygon points="743,20  757,20  812,350  688,350"/>
-        <polygon points="717,350 783,350 836,770  664,770"/>
-        <polygon points="703,770 797,770 861,1200 639,1200"/>
-        <polygon points="690,1200 810,1200 886,1675 614,1675"/>
-        <polygon points="679,1675 821,1675 908,2200 592,2200"/>
-
-        <!-- TREE 6  cx=950, tip=50 -->
-        <polygon points="943,50  957,50  1012,380  888,380"/>
-        <polygon points="917,380 983,380 1036,800  864,800"/>
-        <polygon points="903,800 997,800 1061,1230 839,1230"/>
-        <polygon points="890,1230 1010,1230 1086,1705 814,1705"/>
-        <polygon points="879,1705 1021,1705 1108,2230 792,2230"/>
-
-        <!-- TREE 7  cx=1150, tip=5 -->
-        <polygon points="1143,5  1157,5  1212,335 1088,335"/>
-        <polygon points="1117,335 1183,335 1236,755 1064,755"/>
-        <polygon points="1103,755 1197,755 1261,1185 1039,1185"/>
-        <polygon points="1090,1185 1210,1185 1286,1660 1014,1660"/>
-        <polygon points="1079,1660 1221,1660 1308,2185 992,2185"/>
-
-        <!-- TREE 8  cx=1340, tip=30 -->
-        <polygon points="1333,30 1347,30 1402,360 1278,360"/>
-        <polygon points="1307,360 1373,360 1426,780 1254,780"/>
-        <polygon points="1293,780 1387,780 1440,1210 1229,1210"/>
-        <polygon points="1280,1210 1400,1210 1440,1685 1204,1685"/>
-        <polygon points="1269,1685 1411,1685 1440,2210 1182,2210"/>
-
-      </g>
-    </svg>
-  </div>
-
+  <!-- ── Layer 2: Near trees ───────────────────────────────────────────── -->
+  <!--
+    viewBox: 0 0 1440 2600  (260vh at 10units/vh)
+    6 trees — larger, darker, 5 tiers.
+    Tiers relative to tip_y:
+      T1: top ±8,  bot ±70  at tip+360
+      T2: top ±38, bot ±96  at tip+815  (starts +415)
+      T3: top ±54, bot ±124 at tip+1310 (starts +870)
+      T4: top ±68, bot ±152 at tip+1855 (starts +1365)
+      T5: top ±80, bot ±176 at tip+2460 (starts +1910)
+    At max scroll (-110vh), viewer sees y=1100–2100 — within T4/T5 canopy.
+  -->
   <div class="layer layer-trees-front">
     <svg viewBox="0 0 1440 2600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
 
@@ -222,6 +241,8 @@
     </svg>
   </div>
 
+  <!-- ── Layer 3: Fence ────────────────────────────────────────────────── -->
+  <!-- GSAP starts this at y=100vh (hidden below viewport), moves to y=65vh -->
   <div class="layer layer-fence">
     <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="62"  width="1440" height="16" rx="3" fill="#6b5a3e"/>
@@ -255,119 +276,67 @@
     </svg>
   </div>
 
-  <!-- ── Hero ───────────────────────────────────────── -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">Built Right Fencing<br>and Tree Planting Services</h1>
-      <p class="hero-sub">Honest work. Rooted in PEI.</p>
-      <a href="#contact" class="btn btn-primary">Get a Quote</a>
+  <!-- ── Scrollable content (floats over fixed layers) ─────────────────── -->
+  <div class="page-content">
+    <div class="section">
+      <div class="card">
+        <h2>🌲 In the canopy</h2>
+        <p>Scroll down. The sky is above, treetops all around. Each layer moves at a different speed — sky barely moves, near trees move fastest.</p>
+      </div>
     </div>
-  </section>
-
-  <!-- ── Services ───────────────────────────────────── -->
-<section class="section services" id="services">
-  <div class="container">
-    <h2 class="section-title">What We Do</h2>
-    <div class="services-grid">
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="8" y="30" width="48" height="6" rx="2" fill="currentColor"/>
-            <rect x="8" y="46" width="48" height="6" rx="2" fill="currentColor"/>
-            <rect x="12" y="20" width="8" height="36" rx="2" fill="currentColor"/>
-            <polygon points="12,20 16,8 20,20" fill="currentColor"/>
-            <rect x="28" y="20" width="8" height="36" rx="2" fill="currentColor"/>
-            <polygon points="28,20 32,8 36,20" fill="currentColor"/>
-            <rect x="44" y="20" width="8" height="36" rx="2" fill="currentColor"/>
-            <polygon points="44,20 48,8 52,20" fill="currentColor"/>
-          </svg>
-        </div>
-        <h3 class="service-title">Fencing</h3>
-        <p class="service-desc">Decks, posts, rail fencing — built to last. We use quality materials and take pride in clean, lasting work.</p>
+    <div class="section">
+      <div class="card">
+        <h2>🌿 Mid-forest</h2>
+        <p>Deeper now. The branch tiers are surrounding you. The sky has receded behind the canopy.</p>
       </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="29" y="32" width="6" height="26" rx="2" fill="currentColor"/>
-            <polygon points="32,4 14,36 50,36" fill="currentColor"/>
-            <polygon points="32,16 18,40 46,40" fill="currentColor" opacity="0.6"/>
-          </svg>
-        </div>
-        <h3 class="service-title">Tree Planting</h3>
-        <p class="service-desc">From seedling to canopy. We plant it right — proper depth, proper spacing, proper care from day one.</p>
+    </div>
+    <div class="section">
+      <div class="card">
+        <h2>🌲 Forest floor</h2>
+        <p>The fence is rising into view at the bottom of the scene. Built Right planted these trees — and now they're fencing this land too.</p>
       </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="29" y="36" width="6" height="22" rx="2" fill="currentColor"/>
-            <polygon points="32,8 18,38 46,38" fill="currentColor"/>
-            <line x1="46" y1="18" x2="54" y2="10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="56" cy="8" r="4" fill="currentColor"/>
-          </svg>
-        </div>
-        <h3 class="service-title">Tree Care</h3>
-        <p class="service-desc">Pruning, removal, and maintenance. Healthy trees, safe property. We handle it all with care.</p>
+    </div>
+    <div class="section">
+      <div class="card">
+        <h2>Built Right.</h2>
+        <p>Honest work. Rooted in PEI.</p>
       </div>
-
     </div>
   </div>
-</section>
 
-  <!-- ── About ──────────────────────────────────────── -->
-<section class="section about" id="about">
-  <div class="container about-layout">
-    <div class="about-text">
-      <h2 class="section-title">About Us</h2>
-      <p>Built Right started in 2026 with one goal — do the job right the first time. Based in Prince Edward Island, we serve residential and commercial clients across the island.</p>
-      <p>No shortcuts, no surprises. We show up when we say we will, we use materials that last, and we leave your property cleaner than we found it.</p>
-      <p>When you hire Built Right, you get honest people doing honest work. That's the whole story.</p>
-    </div>
-    <div class="about-accent" aria-hidden="true">
-      <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
-        <rect x="90" y="200" width="20" height="60" rx="4" fill="#3d2b1f"/>
-        <polygon points="100,140 60,210 140,210" fill="#1a3d2b"/>
-        <polygon points="100,100 65,165 135,165" fill="#2d6a4f"/>
-        <polygon points="100,60 70,120 130,120" fill="#3a7d5a"/>
-        <polygon points="100,20 78,75 122,75" fill="#4a9b6a"/>
-        <ellipse cx="100" cy="258" rx="70" ry="10" fill="#2d6a4f" opacity="0.3"/>
-      </svg>
-    </div>
-  </div>
-</section>
+  <div id="debug">0%</div>
 
-<!-- ── Contact ────────────────────────────────────── -->
-<section class="section contact" id="contact">
-  <div class="container">
-    <h2 class="section-title">Get in Touch</h2>
-    <div class="contact-layout">
-      <a href="mailto:robjmacd@gmail.com" class="contact-item">
-        <img src="assets/icons/email.svg" alt="" class="contact-icon" aria-hidden="true">
-        <span>robjmacd@gmail.com</span>
-      </a>
-      <a href="tel:+19022144251" class="contact-item">
-        <img src="assets/icons/phone.svg" alt="" class="contact-icon" aria-hidden="true">
-        <span>(902) 214-4251</span>
-      </a>
-      <a href="https://www.facebook.com/people/Built-Right-Fencing-and-Tree-Planting-Services/61570965324422/" target="_blank" rel="noopener" class="contact-item">
-        <img src="assets/icons/facebook.svg" alt="" class="contact-icon" aria-hidden="true">
-        <span>Facebook</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ── Footer ── -->
-<footer class="site-footer">
-
-  <p class="footer-copy">&copy; 2026 Built Right Fencing and Tree Planting Services. Prince Edward Island.</p>
-  <a href="mailto:robjmacd@gmail.com" class="footer-email">robjmacd@gmail.com</a>
-</footer>
   <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="app.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis();
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    lenis.on('scroll', ({ progress }) => {
+      document.getElementById('debug').textContent = Math.round(progress * 100) + '%';
+    });
+
+    const trigger = {
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1.5
+    };
+
+    gsap.to('.layer-sky',         { y: '-15vh',  ease: 'none', scrollTrigger: trigger });
+    gsap.to('.layer-trees-back',  { y: '-60vh',  ease: 'none', scrollTrigger: trigger });
+    gsap.to('.layer-trees-front', { y: '-110vh', ease: 'none', scrollTrigger: trigger });
+
+    gsap.fromTo('.layer-fence',
+      { y: '100vh' },
+      { y: '65vh',  ease: 'none', scrollTrigger: trigger }
+    );
+  </script>
+
 </body>
 </html>
