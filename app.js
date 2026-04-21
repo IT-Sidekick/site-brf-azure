@@ -26,7 +26,7 @@ gsap.fromTo('.layer-fence',
     ease: 'none',
     scrollTrigger: {
       trigger: '#contact',
-      start: 'top 55%',
+      start: 'top 80%',
       end: 'bottom bottom',
       scrub: 1.5,
       invalidateOnRefresh: true
