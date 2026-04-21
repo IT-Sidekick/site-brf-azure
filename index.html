@@ -222,41 +222,6 @@
     </svg>
   </div>
 
-  <!-- ── Bush layer — behind fence (z-index 12), peeks above fence line ── -->
-  <!-- Bumpy hedge silhouette. GSAP sets y=100vh initially, rises to y=58vh -->
-  <div class="layer layer-bush">
-    <!-- 35vh tall: top 18vh visible above fence (z-index 12 < fence 15),
-         bottom 17vh extends behind fence so it looks rooted, not floating -->
-    <svg viewBox="0 0 1440 350" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 0,350 L 0,100
-        Q 55,16  120,78
-        Q 178,10  248,72
-        Q 305,6   378,70
-        Q 438,10  508,68
-        Q 568,4   638,62
-        Q 698,16  768,72
-        Q 828,5   900,65
-        Q 960,14  1030,70
-        Q 1092,6  1162,66
-        Q 1222,12 1295,72
-        Q 1348,14 1440,82
-        L 1440,350 Z" fill="#2e6b24"/>
-      <path d="M 0,350 L 0,118
-        Q 55,46  120,100
-        Q 178,40 248,95
-        Q 305,38 378,94
-        Q 438,42 508,92
-        Q 568,34 638,88
-        Q 698,46 768,98
-        Q 828,36 900,90
-        Q 960,44 1030,96
-        Q 1092,38 1162,92
-        Q 1222,44 1295,98
-        Q 1348,46 1440,105
-        L 1440,350 Z" fill="#356b28" opacity="0.45"/>
-    </svg>
-  </div>
-
   <div class="layer layer-fence">
     <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="62"  width="1440" height="16" rx="3" fill="#6b5a3e"/>
@@ -416,57 +381,6 @@
 
 <!-- ── Footer ── -->
 <footer class="site-footer">
-
-  <!-- Grass blades and spring flower along the lawn's top edge -->
-  <div class="lawn-decoration" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
-
-      <!-- Cluster 1 ~x=120 — lawn-matching dark greens, taller tips -->
-      <path d="M120,80 Q117,46 123,-4"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M130,80 Q136,40 128,-8"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M112,80 Q108,48 116,0"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
-      <path d="M140,80 Q147,44 138,-2"  stroke="#1e4a32" stroke-width="2"   fill="none" stroke-linecap="round"/>
-
-      <!-- Lone blade ~x=230 -->
-      <path d="M230,80 Q227,42 233,-6"  stroke="#245438" stroke-width="2"   fill="none" stroke-linecap="round"/>
-
-      <!-- Spring flower ~x=310 — unchanged, user said perfect -->
-      <path d="M310,80 Q309,60 312,38" stroke="#4a7a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M311,62 Q301,54 304,46" stroke="#4a7a2a" stroke-width="1.5" fill="#5a9230" stroke-linecap="round"/>
-      <g transform="translate(312,32)">
-        <circle cx="0"    cy="-8"  r="4.5" fill="#fffde8"/>
-        <circle cx="6.9"  cy="-4"  r="4.5" fill="#fffde8"/>
-        <circle cx="6.9"  cy="4"   r="4.5" fill="#fffde8"/>
-        <circle cx="0"    cy="8"   r="4.5" fill="#fffde8"/>
-        <circle cx="-6.9" cy="4"   r="4.5" fill="#fffde8"/>
-        <circle cx="-6.9" cy="-4"  r="4.5" fill="#fffde8"/>
-        <circle cx="0"    cy="0"   r="5"   fill="#f5d020"/>
-      </g>
-
-      <!-- Cluster 2 ~x=580 -->
-      <path d="M580,80 Q577,38 583,-6"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M590,80 Q597,42 588,-4"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M572,80 Q568,46 576,2"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
-
-      <!-- Lone blade ~x=720 -->
-      <path d="M720,80 Q716,44 722,-8"  stroke="#1e4a32" stroke-width="2"   fill="none" stroke-linecap="round"/>
-
-      <!-- Cluster 3 ~x=920 -->
-      <path d="M920,80 Q917,41 923,-8"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M930,80 Q937,44 928,-4"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M912,80 Q908,46 915,0"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
-      <path d="M940,80 Q947,48 937,-2"  stroke="#1e4a32" stroke-width="2"   fill="none" stroke-linecap="round"/>
-
-      <!-- Lone blade ~x=1100 -->
-      <path d="M1100,80 Q1097,40 1103,-8" stroke="#245438" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-      <!-- Cluster 4 ~x=1310 -->
-      <path d="M1310,80 Q1307,38 1313,-6"  stroke="#245438" stroke-width="3"   fill="none" stroke-linecap="round"/>
-      <path d="M1320,80 Q1327,42 1318,-4"  stroke="#1e4a32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M1302,80 Q1298,46 1305,2"   stroke="#2d5e3e" stroke-width="2"   fill="none" stroke-linecap="round"/>
-
-    </svg>
-  </div>
 
   <p class="footer-copy">&copy; 2026 Built Right Fencing and Tree Planting Services. Prince Edward Island.</p>
   <a href="mailto:robjmacd@gmail.com" class="footer-email">robjmacd@gmail.com</a>
